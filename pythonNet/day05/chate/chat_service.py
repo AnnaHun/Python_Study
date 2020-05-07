@@ -22,7 +22,7 @@ def do_login(s, name, addr):
     s.sendto(b'ok', addr)
 
     # 通知其他人
-    msg = "欢迎%s进入聊天室" % name
+    msg = "\n 欢迎%s进入聊天室" % name
     for i in user:
         s.sendto(msg.encode(), user[i])
 
@@ -43,7 +43,7 @@ def do_chat(s, name, text):
 
 # 退出
 def do_quit(s, name):
-    msg = "%s退出了聊天室" % name
+    msg = "\n %s退出了聊天室" % name
     for i in user:
         if i != name:
             s.sendto(msg.encode(), user[i])
@@ -63,6 +63,9 @@ def do_request(s):
             text = " ".join(msg[2:])
             do_chat(s, msg[1], text)
         elif msg[0] == "Q":
+            if msg[1] not in user:
+                s.sendto(b'EXIT', addr)
+                continue
             do_quit(s, msg[1])
 
 

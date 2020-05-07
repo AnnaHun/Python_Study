@@ -22,12 +22,13 @@ def send_msg(s, name):
 
 # 接收消息
 def recv_msg(s):
+
     while True:
         data, addr = s.recvfrom(2048)
         # 服务端发送exit表示让客户端退出
         if data.decode() == 'EXIT':
             sys.exit()
-        print(data.decode())
+        print(data.decode() + "\n f发言：", end=' ')
 
 
 # 创建网络连接
