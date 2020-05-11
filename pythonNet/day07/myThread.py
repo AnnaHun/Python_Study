@@ -18,11 +18,20 @@ from threading import Thread
 from time import sleep, ctime
 
 
+# 继承thread类
 class MyThread(Thread):
-    pass
+    def __init__(self, target=None, args=(), kwargs={}, name="tedu"):
+        super().__init__()
+        self.target = target
+        self.args = args
+        self.kwargs = kwargs
+        self.name = name
+
+    # 重写父类的run方法 - ---thread的run方法
+    def run(self):
+        self.target(*self.args, **self.kwargs)
 
 
-# *****************************************
 def player(sec, song):
     for i in range(2):
         print("Playing %s:%s" % (song, ctime()))
