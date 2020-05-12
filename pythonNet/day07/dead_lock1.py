@@ -10,8 +10,8 @@
     @License     : (C)Copyright 2020-2022, ZhuGroup-ZB-CASIA
     @version     :  v1.0
     
-    @Desciption  : 
-  
+    @Descriptions:
+
 """
 
 from threading import Thread, RLock
