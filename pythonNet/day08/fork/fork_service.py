@@ -18,7 +18,7 @@ import os, sys
 import signal
 
 # 创建监听套接字
-HOST = '106.14.213.53'
+HOST = '0.0.0.0'
 PORT = 8888
 ADDR = (HOST, PORT)
 s = socket()  # tcp套接字
