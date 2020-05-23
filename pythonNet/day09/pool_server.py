@@ -48,7 +48,10 @@ while True:
             p.unregister(fd)  # 取消关注
             fdmap[fd].close()
             del fdmap[fd]  # 从字典删除
+            continue
         elif event & POLLIN:  # 客户端发消息
             data = fdmap[fd].recv(1024)
+            if not data:
+                continue
             print(data.decode())
             fdmap[fd].send(b'ok')
