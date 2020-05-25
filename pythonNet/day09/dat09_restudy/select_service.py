@@ -37,7 +37,18 @@ while True:
             c, addr = r.accept()
             print("connect from ", addr)
             rlist.append(c)  # 加入新的关注io
+        else:
+            data = r.recv(1024)
+            if not data:
+                rlist.remove(r)
+                r.close()
+                continue
+            print(data.decode())
+            # r.send(b'ok')
+            # 希望我们主动处理这个io
+            wlist.append(r)
     for w in ws:
-        pass
+        w.send(b"ok,thanks")
+        wlist.remove(w)
     for x in xs:
         pass
