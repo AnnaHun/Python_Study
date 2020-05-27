@@ -76,7 +76,9 @@ class HTTPServer:
         if info == '/' or info[-5:] == '.html':
             self.get_html(connfd, info)
         else:
-            pass
+            self.get_data(connfd, info)
+        self.rlist.remove(connfd)
+        connfd.close()
 
     # 处理网页
     def get_html(self, connfd, info):
@@ -100,6 +102,15 @@ class HTTPServer:
         finally:
             response = responseHeaders + responseBody
             connfd.send(response.encode())
+
+    # 其他情况
+    def get_data(self, connfd, info):
+        # 没有网页
+        responseHeaders = 'HTTP/1.1 200 OK\r\n'
+        responseHeaders += '\r\n'
+        responseBody = "<h1>Waiting httpserver 3.0</h1>"
+        response = responseHeaders + responseBody
+        connfd.send(response.encode())
 
 
 # 如何使用HTTPServer类
