@@ -36,6 +36,10 @@ while True:
     key_word = re.match(r'\S+', data).group()
     if port == key_word:
         pattern = r'[0-9a-f]{4}\.[0-9a-f]{4}\.[0-9a-f]{4}\.[0-9a-f]{4}'
-        address = re.search(pattern, data).group()
-        print(address)
-        break
+        try:
+            address = re.search(pattern, data).group()
+            print(address)
+            break
+        except:
+            print("not found the %s" % port)
+            break
